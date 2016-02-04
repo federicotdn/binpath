@@ -1,17 +1,19 @@
 package binpath
 
-import "path"
+import "path/filepath"
 
 var extensions map[string]struct{}
 
 func IsBinaryPath(p string) bool {
-	_, present := extensions[path.Ext(p)]
+	_, present := extensions[filepath.Ext(p)]
 	return present
 }
 
 func init() {
 	extensions = make(map[string]struct{})
 
+	// File extensions list from:
+	// github.com/sindresorhus/binary-extensions
 	extlist := []string{
 		"3ds",
 		"3g2",
